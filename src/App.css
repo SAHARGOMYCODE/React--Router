@@ -36,9 +36,13 @@
     transform: rotate(360deg);
   }
 }
-p {
-  font-style: italic;
+.navmenu {
+  display: flex;
+  justify-content: space-between;
+  background-color: #5f9ea0;
+  padding: 5%;
 }
-body {
-  background-color: #f0ffff;
+.addMovie:hover {
+  background-color: #fffacd !important;
+  color: black !important;
 }

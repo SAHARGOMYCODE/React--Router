@@ -1,19 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { moviesData } from "./Constants/data";
 import "./App.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Film from "./Component/Film";
-import BondeAnnonce from "./Component/BondeAnnonce";
+import MovieList from "./Components/MovieList";
+import AddMovie from "./Components/Add/Add";
+import Filter from "./Components/Filter/Filter";
 
-import Description from "./Component/Description";
+// import MovieCard from "./Components/MovieCard/MovieCard";
+// import Description from "./Components/Description";
+// import AppRouter from "./router/router";
 
 function App() {
+  const [movies, setMovies] = useState(moviesData);
+  const [textSerach, setTextSerach] = useState("");
+  const [searchRate, setSearchRate] = useState(0);
+  const handleAdd = (newMovie) => {
+    if (newMovie.name !== "") {
+      setMovies([...movies, newMovie]);
+    }
+  };
   return (
-    <div className="App">
-      <Router>
-        <Film />
-        <Route path="/Description" exact component={Description}></Route>
-        <Route path="/BondeAnnonce" exact component={BondeAnnonce}></Route>
-      </Router>
+    <div>
+      <div className="navmenu">
+        <Filter
+          rating={searchRate}
+          setSearchRate={setSearchRate}
+          setTextSerach={setTextSerach}
+        />
+
+        <AddMovie handleAdd={handleAdd} />
+      </div>
+
+      <MovieList
+        searchRate={searchRate}
+        textSerach={textSerach}
+        movies={movies}
+      />
     </div>
   );
 }
